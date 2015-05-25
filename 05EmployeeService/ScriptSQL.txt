@@ -1,29 +1,89 @@
-﻿Create Table tblEmployees
-(
-Id int primary key,
-Name nvarchar(50),
-Gender nvarchar(50),
-DateOfBirth date
-)
+﻿
+USE [EmployeeWCF]
+GO
 
-insert into tblEmployees values(1,'Mark','Male','10/10/1980')
-insert into tblEmployees values(1,'Mary','Male','11/10/1981')
-insert into tblEmployees values(1,'John','Male','8/10/1979')
-go
-Create procedure spGetEmployee
+/****** Object:  Table [dbo].[Employees]    Script Date: 25/05/2015 15:30:11 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Employees](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NULL,
+	[DateOfBirth] [date] NULL,
+	[AnnualSalary] [int] NULL,
+	[HourlyPay] [int] NULL,
+	[HoursWorked] [int] NULL,
+	[Discriminator] [nvarchar](128) NOT NULL DEFAULT (''),
+	[typeContract] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_dbo.Employees] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+USE [EmployeeWCF]
+GO
+
+/****** Object:  StoredProcedure [dbo].[spGetEmployee]    Script Date: 25/05/2015 15:32:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[spGetEmployee]
 @Id int
 as
 Begin
-	select Id,Name,Gender,DateOfBirth
-	from tblEmployees
+	select *
+	from Employees
 	where Id=@Id
 End
-go
-create procedure spSaveEmployee
+
+GO
+
+
+USE [EmployeeWCF]
+GO
+
+/****** Object:  StoredProcedure [dbo].[spSaveEmployee]    Script Date: 25/05/2015 15:32:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Batch submitted through debugger: SQLQuery1.sql|21|0|C:\Users\Saadna\AppData\Local\Temp\~vs7421.sql
+CREATE procedure [dbo].[spSaveEmployee]
 @Name nvarchar(50),
 @Gender nvarchar(50),
-@DateOfBirth date
+@DateOfBirth date,
+@typeContract int,
+@AnnualSalary int=null,
+@HourlyPay int=null,
+@HoursWorked int=null
+
 as
 begin
-	insert into tblEmployees(Name,Gender,DateOfBirth) values (@Name,@Gender,@DateOfBirth)
+	insert into Employees(Name,Gender,DateOfBirth,typeContract,AnnualSalary,HourlyPay,HoursWorked) values
+	 (@Name,@Gender,@DateOfBirth,@typeContract,@AnnualSalary,@HourlyPay,@HoursWorked)
 end
+GO
+
+
+
+
+
+insert into Employees(Name,Gender,DateOfBirth,typeContract,AnnualSalary) 
+			values('Mark','Male','10/10/1980',1,40000);
+
+insert into Employees(Name,Gender,DateOfBirth,typeContract,hourlyPay,HoursWorked) 
+			values('John','Male','10/10/1980',2,10,400);
