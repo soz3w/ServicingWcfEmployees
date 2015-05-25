@@ -1,0 +1,7 @@
+right click client config file
+edit wcf
+diagnostics
+enable messaging
+enable auto delete
+enable tracing
+extend diagnoctis, messaging : enable save entire message

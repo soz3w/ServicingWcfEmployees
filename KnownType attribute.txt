@@ -1,0 +1,16 @@
+4 different ways:
+
+1- use [knowntype] attribute on the base type : option global, all servicecontracts and operations
+   contracts will respect the known types.
+
+2- Apply [ServiceKnownType] on the service contract : only the operations contracts 
+   in this service will respect the knowntype
+3- Apply [ServiceKnownType] on the operation contract we want
+
+4- Specify known Types in the configuration file => global
+<System.runtime.serialization>
+	<dataContractSerializer>
+		<declaredTypes>
+			<add type ="namespace.class, namespace" version =1.0.0.0, culture=Neutral, PublicKeyToken=null>
+				<knownType type="namespace.subclass1, namespace, ..."
+				<knownType type="namespace.subclass2, namespace, ..."
