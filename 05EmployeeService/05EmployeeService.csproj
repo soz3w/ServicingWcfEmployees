@@ -67,7 +67,10 @@
     <Compile Include="Employee.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="KnownType attribute.txt" />
     <Content Include="ScriptSQL.txt" />
+    <Content Include="Tracing_and_Messaging.txt" />
+    <Content Include="using MessageContract .txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

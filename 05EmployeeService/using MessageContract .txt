@@ -1,0 +1,6 @@
+used to change behavior of the soap data, rename properties, add header ( for asking licence for example)
+
+with message contract we possibility to control all the soap enveloppe
+
+the header should be used for peripheric for all about license, security access
+ instead of using parameters in the operation contract ( when doing datacontract ), what is more object logic
